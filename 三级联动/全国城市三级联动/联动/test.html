@@ -1,0 +1,30 @@
+<html>
+	<head>
+        <meta charset="utf-8">
+        <script src="geo.js" charset="utf-8"></script>
+        <script>
+            function promptinfo()
+            {
+                var address = document.getElementById('address');
+                var s1 = document.getElementById('s1');
+                var s2 = document.getElementById('s2');
+                var s3 = document.getElementById('s3');
+                address.value = s1.value + s2.value + s3.value;
+            }
+        </script>
+	</head>
+
+	<body onload="setup();preselect('江苏省');">
+	<select name="province" id="s1">
+        <option value=""></option>
+    </select>
+	<select name="city" id="s2">
+        <option value=""></option>
+    </select>
+	<select name="town" id="s3">
+        <option value=""></option>
+    </select>
+	<input id="address" name="address" type="hidden" value="" />
+    <input type="submit" value="提交" onclick="promptinfo();alert(document.getElementById('address').value);return false;"/>
+	</body>
+</html>

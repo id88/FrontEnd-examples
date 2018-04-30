@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联动5</title>
+</head>
+<body>
+    <div>
+        <div class="content">
+            <select name="" id="sel_p"></select>
+            <select name="" id="sel_c"></select>
+            <select name="" id="sel_a"></select>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="./jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        var arr_p = [
+            {'id': 0, 'text': '请选择省份'},
+            {'id': 1, 'text': '广东'},
+            {'id': 2, 'text': '湖南'},
+            {'id': 3, 'text': '河北'}
+        ];
+        var arr_c = [
+            {'id': 0, 'p_id':0, 'text': '请选择城市'},
+            {'id': 0, 'p_id':1, 'text': '请选择城市'},
+            {'id': 0, 'p_id':2, 'text': '请选择城市'},
+            {'id': 0, 'p_id':3, 'text': '请选择城市'},
+            {'id': 1, 'p_id':1, 'text': '广州'},
+            {'id': 2, 'p_id':1, 'text': '佛山'},
+            {'id': 3, 'p_id':1, 'text': '深圳'},
+            {'id': 4, 'p_id':2, 'text': '长沙'},
+            {'id': 5, 'p_id':2, 'text': '永州'},
+            {'id': 6, 'p_id':3, 'text': '石家庄'},
+            {'id': 7, 'p_id':3, 'text': '沧州'}
+        ];
+        var arr_a = [
+            {'id': 0, 'c_id':0, 'text': '请选择区域'},
+            {'id': 0, 'c_id':1, 'text': '请选择区域'},
+            {'id': 0, 'c_id':2, 'text': '请选择区域'},
+            {'id': 0, 'c_id':3, 'text': '请选择区域'},
+            {'id': 1, 'c_id':1, 'text': '广州A区'},
+            {'id': 2, 'c_id':1, 'text': '广州B区'},
+            {'id': 3, 'c_id':1, 'text': '广州C区'},
+            {'id': 4, 'c_id':1, 'text': '广州D区'},
+            {'id': 5, 'c_id':2, 'text': '佛山A区'},
+            {'id': 6, 'c_id':2, 'text': '佛山B区'},
+            {'id': 7, 'c_id':2, 'text': '佛山C区'}
+        ];
+
+        function general_select_p(){
+            // 获取 id 为 sel_p 的标签
+            var select = $("#sel_p");
+            var len = arr_p.length;
+            for(var i = 0; i < len; i++){
+                var option = '<option value="' + arr_p[i]['id'] + '">' + arr_p[i]['text'] + '</option>';
+                // 加入到该标签中
+                select.append(option);
+            }
+        }
+
+        // 传递参数 p_id
+        function general_select_c(p_id){
+            // 获取 id 为 sel_c 的标签
+            var select = $("#sel_c");
+            select.empty();
+            var len = arr_c.length;
+            for(var i = 0; i < len; i++){
+                if(arr_c[i]['p_id']==p_id){
+                    var option = '<option value="' + arr_c[i]['id'] + '">' + arr_c[i]['text'] + '</option>';
+                    // 加入到该标签中
+                    select.append(option);
+                }
+            }
+        }
+
+        function general_select_a(c_id){
+            var select = $("#sel_a");
+            select.empty();
+            var len = arr_a.length;
+            for(var i = 0; i < len; i++){
+                if(arr_a[i]['c_id']==c_id){
+                    var option = '<option value="' + arr_a[i]['id'] + '">' + arr_a[i]['text'] + '</option>';
+                    select.append(option);
+                }
+            }
+        }
+
+
+        // 页面加载时调用函数方法
+        $(document).ready(function(){
+            general_select_p();
+            general_select_c(0);
+            general_select_a(0);
+
+            // 然后为第一个下拉框添加change事件，
+            // 就是当第一个下拉框选择不同的省时，需要用该省下的市数据填充到第二个下拉框里。
+            $("#sel_p").change(function(){
+                // 获取第一个下拉框，省份的 id
+                var p_id = $(this).val();
+                // 将省份 id 传递给第二个下拉框作为参数
+                general_select_c(p_id);
+                // 获取城市 id
+                var c_id = $("#sel_c").val();
+                // 将城市 id，传递给第三个下拉框，选择区域的函数
+                general_select_a(c_id);
+            });
+            $("#sel_c").change(function(){
+                var c_id = $(this).val();
+                general_select_a(c_id);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联动2</title>
+</head>
+<body>
+    <div>
+        <div class="content">
+            <select name="" id="sel_p"></select>
+            <select name="" id="sel_c"></select>
+            <select name="" id=""></select>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="./jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        var arr_p = [
+            {'id': 0, 'text': '请选择'},
+            {'id': 1, 'text': '广东'},
+            {'id': 2, 'text': '湖南'},
+            {'id': 3, 'text': '河北'}
+        ];
+        var arr_c = [
+            {'id': 0, 'p_id':0, 'text': '请选择'},
+            {'id': 1, 'p_id':1, 'text': '广州'},
+            {'id': 2, 'p_id':1, 'text': '佛山'},
+            {'id': 3, 'p_id':1, 'text': '深圳'},
+            {'id': 4, 'p_id':2, 'text': '长沙'},
+            {'id': 5, 'p_id':2, 'text': '永州'},
+            {'id': 6, 'p_id':3, 'text': '石家庄'},
+            {'id': 7, 'p_id':3, 'text': '沧州'}
+        ];
+
+        function general_select_p(){
+            // 获取 id 为 sel_p 的标签
+            var select = $("#sel_p");
+            var len = arr_p.length;
+            for(var i = 0; i < len; i++){
+                var option = '<option value="' + arr_p[i]['id'] + '">' + arr_p[i]['text'] + '</option>';
+                // 加入到该标签中
+                select.append(option);
+            }
+        }
+
+        // 传递参数 p_id
+        function general_select_c(p_id){
+            // 获取 id 为 sel_c 的标签
+            var select = $("#sel_c");
+            select.empty();
+            var len = arr_c.length;
+            for(var i = 0; i < len; i++){
+                if(arr_c[i]['p_id']==p_id){
+                    var option = '<option value="' + arr_c[i]['id'] + '">' + arr_c[i]['text'] + '</option>';
+                    // 加入到该标签中
+                    select.append(option);
+                }
+            }
+        }
+
+
+        // 页面加载时调用函数方法
+        $(document).ready(function(){
+            general_select_p();
+            general_select_c(0);
+
+            // 然后为第一个下拉框添加change事件，
+            // 就是当第一个下拉框选择不同的省时，需要用该省下的市数据填充到第二个下拉框里。
+            $("#sel_p").change(function(){
+                var p_id = $(this).val();
+                general_select_c(p_id);
+                var c_id = $("#sel_c").val();
+            })
+        });
+    </script>
+</body>
+</html>

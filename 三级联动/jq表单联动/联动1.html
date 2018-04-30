@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联动1</title>
+</head>
+<body>
+    <div>
+        <div class="content">
+            <select name="" id="sel_p"></select>
+            <select name="" id="">
+                <option value="aaa">aaa</option>
+                <option value="bbb">bbb</option>
+            </select>
+            <select name="" id=""></select>
+        </div>
+    </div>
+
+
+
+    
+
+    <script type="text/javascript" src="./jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        var arr_p = [
+            {'id': 0, 'text': '请选择'},
+            {'id': 1, 'text': '北京'},
+            {'id': 2, 'text': '上海'},
+            {'id': 3, 'text': '江西'}
+        ];
+
+        // 方法二使用的数据
+        var provinces=["河南省","山西省","山东省"];
+
+        function general_select_p(){
+            // 获取 id 为 sel_p 的标签
+            var select = $("#sel_p");
+            var len = arr_p.length;
+            for(var i = 0; i < len; i++){
+                // <option value="1">北京</option>
+                var option = '<option value="' + arr_p[i]['id'] + '">' + arr_p[i]['text'] + '</option>';
+                // 加入到该标签中
+                select.append(option);
+            }
+        }
+
+        // 方法二
+        // $(function(){
+        //     for(var i=0;i<provinces.length;i++){
+        //         $("#sel_p").append("<option>"+provinces[i]+"</option>");
+        //     }
+        // });
+
+
+        // 页面加载时调用函数方法
+        $(document).ready(function(){
+            general_select_p();
+        });
+    </script>
+</body>
+</html>

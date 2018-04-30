@@ -1,0 +1,6 @@
+下载地址
+http://jquery.com/download/
+
+打开该下载页面，点击Download
+火狐、谷歌浏览器是会以源码的方式打开
+而微软的Edge浏览器则会弹出是否下载该文件
